@@ -43,3 +43,21 @@ python evaluation/evaluate.py
 ```
 >>> [{'lang': 'am', 'STA': 1.0, 'SIM': 1.0, 'XCOMET': 0.9268987967570623, 'J': 0.9268987967570623}, {'lang': 'ar', 'STA': 1.0, 'SIM': 0.9999999998509884, 'XCOMET': 0.946625092625618, 'J': 0.9466250924830601}, {'lang': 'de', 'STA': 1.0, 'SIM': 0.9999999999006589, 'XCOMET': 0.9824136279026667, 'J': 0.9824136278044319}, {'lang': 'en', 'STA': 1.0, 'SIM': 1.0, 'XCOMET': 0.7565387411415577, 'J': 0.7565387411415577}, {'lang': 'es', 'STA': 1.0, 'SIM': 0.9999999999006589, 'XCOMET': 0.9624946667750677, 'J': 0.9624946666793917}, {'lang': 'fr', 'STA': 1.0, 'SIM': 1.0, 'XCOMET': 0.9662858235836029, 'J': 0.9662858235836029}, {'lang': 'he', 'STA': 1.0, 'SIM': 1.0, 'XCOMET': 0.9520459377765655, 'J': 0.9520459377765655}, {'lang': 'hi', 'STA': 1.0, 'SIM': 0.9999999997516473, 'XCOMET': 0.9553370489676793, 'J': 0.9553370487302921}, {'lang': 'hin', 'STA': 1.0, 'SIM': 0.9999999994039536, 'XCOMET': 0.9149222415685654, 'J': 0.9149222410194864}, {'lang': 'it', 'STA': 1.0, 'SIM': 1.0, 'XCOMET': 0.9616609334945678, 'J': 0.9616609334945678}, {'lang': 'ja', 'STA': 1.0, 'SIM': 1.0, 'XCOMET': 0.9549923813343049, 'J': 0.9549923813343049}, {'lang': 'ru', 'STA': 1.0, 'SIM': 0.9999999999006589, 'XCOMET': 0.9612591344118119, 'J': 0.961259134316393}, {'lang': 'tt', 'STA': 1.0, 'SIM': 1.0, 'XCOMET': 0.9360820281505585, 'J': 0.9360820281505585}, {'lang': 'uk', 'STA': 1.0, 'SIM': 1.0, 'XCOMET': 0.9617038138707479, 'J': 0.9617038138707479}, {'lang': 'zh', 'STA': 1.0, 'SIM': 0.9999999998013178, 'XCOMET': 0.9559485997756322, 'J': 0.9559485995835458}]
 ```
+
+## Problem Shot
+
+1. Errors from comet:
+```bash
+  File "C:\Users\FLoPC\anaconda3\envs\junqi\lib\site-packages\comet\models\base.py", line 121, in __init__
+    self.encoder = str2encoder[self.hparams.encoder_model].from_pretrained(
+TypeError: from_pretrained() takes from 2 to 3 positional arguments but 4 were given
+```
+
+**solution:**
+This is caused due to the outdated version of transformer called in comet. Enter the local file, and then replace the `self.encoder` with:
+```python
+self.encoder = str2encoder[self.hparams.encoder_model].from_pretrained(
+    self.hparams.pretrained_model,
+    load_pretrained_weights,
+)
+```
