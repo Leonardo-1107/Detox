@@ -20,6 +20,12 @@ python src/detox.py --model_path models/t5-ft --input_tsv input_data/test.tsv --
 python src/train.py --train_path input_data/train.tsv --model_name facebook/bart-base --save_model_dir models/bart-ft --num_train_epochs 50 --augmentation True
 python src/detox.py --model_path models/bart-ft --input_tsv input_data/test.tsv --output_tsv sample_submissions/bart-ft
 
+# train the full-9-language model
+python src/train.py --train_path input_data/train_full.tsv --model_name facebook/bart-base --save_model_dir models/bart-ft-full --num_train_epochs 50 --augmentation True  
+python src/detox.py --model_path models/bart-ft-full --input_tsv input_data/test_full.tsv --output_tsv sample_submissions/bart_full.tsv
+
+
+
 # evaluation
 pip install transformers==4.35.2
 
